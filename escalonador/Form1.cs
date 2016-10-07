@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace escalonador
+namespace EscalonadorDeProcessos
 {
-    public partial class Escalonador : Form
+    public partial class EscalonadorDeProcessos : Form
     {
-        public Escalonador()
+        public EscalonadorDeProcessos()
         {
             InitializeComponent();
         }
@@ -41,7 +41,7 @@ namespace escalonador
             }
         }
 
-        public void validaDados() {
+        public void ValidaDados() {
             if (txtDescricao.Text.Length > 1)
             {
                 if (!comboStatus.SelectedItem.Equals(""))
@@ -70,7 +70,7 @@ namespace escalonador
             txtTempo.Text = "";
         }
 
-        public void criaProcesso() {
+        public void CriaProcesso() {
 
         }
     }

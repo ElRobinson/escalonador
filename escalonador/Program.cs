@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace escalonador
+namespace EscalonadorDeProcessos
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace escalonador
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Escalonador());
+            Application.Run(new EscalonadorDeProcessos());
         }
     }
 }

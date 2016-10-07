@@ -1,4 +1,4 @@
-﻿namespace escalonador
+﻿namespace EscalonadorDeProcessos.Models
 {
     public class Processo
     {
