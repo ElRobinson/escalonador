@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace EscalonadorDeProcessos
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -13,7 +13,7 @@ namespace EscalonadorDeProcessos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EscalonadorDeProcessos());
+            Application.Run(new Views.FormularioEscalonador());
         }
     }
 }
