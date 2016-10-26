@@ -8,11 +8,11 @@ namespace EscalonadorDeProcessos.Views
 {
     public partial class FormularioEscalonador : Form
     {
-        public FormularioEscalonador()
+        public FormularioEscalonador(FormularioEscalonadorController controller)
         {
             InitializeComponent();
             PreencherValoresATela();
-            Controller = new FormularioEscalonadorController();
+            Controller = controller;
         }
 
         protected FormularioEscalonadorController Controller { get; set; }
@@ -57,31 +57,6 @@ namespace EscalonadorDeProcessos.Views
                 );
             GridNaoProcessados.Update();
             GridNaoProcessados.Refresh();
-        }
-
-        public void ValidaDados()
-        {
-            if (TxtDescricaoProcesso.Text.Length > 1)
-            {
-                if (!ComboStatus.SelectedItem.Equals(""))
-                {
-                    if (TxtTempoProcesso.Text.Length > 0)
-                    {
-                    }
-                    else
-                    {
-                        MessageBox.Show("### erro, tempo inválido ###");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("### erro, prioridade inválida ###");
-                }
-            }
-            else
-            {
-                MessageBox.Show("### erro, descrição inválida");
-            }
         }
 
         public void LimpaTela()
