@@ -16,32 +16,36 @@ namespace EscalonadorDeProcessos.Controllers
 
         public void CriarProcesso(string descricao, string tempoDeVida, string status)
         {
-            Escalonador.CriarProcesso(descricao, int.Parse(tempoDeVida), (EstadoProcesso) Enum.Parse(typeof (EstadoProcesso), status));
+            if (ProcessoEhValido(descricao, tempoDeVida, status))
+            {
+                Escalonador.CriarProcesso(descricao, int.Parse(tempoDeVida),
+                    (EstadoProcesso) Enum.Parse(typeof (EstadoProcesso), status));
+            }
         }
 
-        public void ValidaProcesso(string descricao, string tempoDeVida, string status)
+        public bool ProcessoEhValido(string descricao, string tempoDeVida, string status)
         {
-            if (descricao.Length > 1)
+            var processoEhValido = true;
+
+            if (descricao.Length < 1)
             {
-                if (!status.Equals(""))
-                {
-                    if (tempoDeVida.Length > 0)
-                    {
-                    }
-                    else
-                    {
-                        MessageBox.Show("### erro, tempo inválido ###");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("### erro, prioridade inválida ###");
-                }
-            }
-            else
-            {
+                processoEhValido = false;
                 MessageBox.Show("### erro, descrição inválida");
             }
+
+            if (status.Equals(""))
+            {
+                processoEhValido = false;
+                MessageBox.Show("### erro, prioridade inválida ###");
+            }
+
+            if (tempoDeVida.Length <= 0)
+            {
+                processoEhValido = false;
+                MessageBox.Show("### erro, tempo inválido ###");
+            }
+
+            return processoEhValido;
         }
 
         public IList<Processo> ListarProcessos()

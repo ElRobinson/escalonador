@@ -53,8 +53,11 @@ namespace EscalonadorDeProcessos.Views
             Controller.ListarProcessos()
                 .ToList()
                 .ForEach(
-                    p => GridNaoProcessados.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo, p.Processador)
-                );
+                    p =>
+                    {
+                        GridNaoProcessados.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo,
+                            p.Processador);
+                    });
             GridNaoProcessados.Update();
             GridNaoProcessados.Refresh();
         }
