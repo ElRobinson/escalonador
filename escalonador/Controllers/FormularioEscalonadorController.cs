@@ -7,11 +7,19 @@ namespace EscalonadorDeProcessos.Controllers
 {
     public class FormularioEscalonadorController : Controller
     {
-        private Escalonador Escalonador { get; }
-
         public FormularioEscalonadorController()
         {
             Escalonador = new Escalonador();
+        }
+
+        private Escalonador Escalonador { get; }
+
+        public void CriarProcessador(string tempo, string nucleos)
+        {
+            if (ProcessadorEhValido(tempo, nucleos))
+            {
+                Escalonador.CriarProcessador(int.Parse(tempo), int.Parse(nucleos));
+            }
         }
 
         public void CriarProcesso(string descricao, string tempoDeVida, string status)
@@ -23,7 +31,26 @@ namespace EscalonadorDeProcessos.Controllers
             }
         }
 
-        public bool ProcessoEhValido(string descricao, string tempoDeVida, string status)
+        private bool ProcessadorEhValido(string tempo, string nucleos)
+        {
+            var processadorEhValido = true;
+
+            if (tempo.Length < 1)
+            {
+                processadorEhValido = false;
+                MessageBox.Show("### erro, tempo inválido ###");
+            }
+
+            if (nucleos.Length <= 0)
+            {
+                processadorEhValido = false;
+                MessageBox.Show("### erro, nucleos inválido ###");
+            }
+
+            return processadorEhValido;
+        }
+
+        private bool ProcessoEhValido(string descricao, string tempoDeVida, string status)
         {
             var processoEhValido = true;
 
@@ -50,7 +77,17 @@ namespace EscalonadorDeProcessos.Controllers
 
         public IList<Processo> ListarProcessos()
         {
-            return Escalonador.ListarProcessos();
+            return Escalonador.Processos;
+        }
+
+        public void LimparProcessadores()
+        {
+            Escalonador.LimparProcessadores();
+        }
+
+        public IList<Processador> ListarProcessadores()
+        {
+            return Escalonador.Processadores;
         }
     }
 }

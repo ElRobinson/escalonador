@@ -5,11 +5,13 @@ namespace EscalonadorDeProcessos.Models
 {
     public class Escalonador
     {
-        private IList<Processo> Processos { get; set; }
+        public IList<Processo> Processos { get; }
+        public IList<Processador> Processadores { get; }
 
         public Escalonador()
         {
             Processos = new List<Processo>();
+            Processadores = new List<Processador>();
         }
 
         public void CriarProcesso(string descricao, int tempo, EstadoProcesso estado)
@@ -18,9 +20,14 @@ namespace EscalonadorDeProcessos.Models
             Processos.Add(new Processo(ordem, descricao, tempo, estado));
         }
 
-        public IList<Processo> ListarProcessos()
+        public void CriarProcessador(int tempo, int nucleos)
         {
-            return Processos;
+            Processadores.Add(new Processador(tempo, nucleos));
+        }
+
+        public void LimparProcessadores()
+        {
+            Processadores.Clear();
         }
     }
 }

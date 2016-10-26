@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,27 +45,27 @@
             this.grid1Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid1Processador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GridProcessosEmEspera = new System.Windows.Forms.DataGridView();
+            this.grid2Ordem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid2Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid2Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid2Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.BtnLimparProcessador = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TxtNucleosProcessador = new System.Windows.Forms.TextBox();
+            this.TxtTempoProcessador = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ComboTipoProcessador = new System.Windows.Forms.ComboBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.GridProcessadores = new System.Windows.Forms.DataGridView();
             this.Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nucleos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid2Ordem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid2Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid2Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid2Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComboTipoProcessador = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridProcessos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridProcessosEmEspera)).BeginInit();
@@ -74,7 +74,7 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridProcessadores)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -176,12 +176,12 @@
             // 
             // GridProcessos
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.GridProcessos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.GridProcessos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridProcessos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridProcessos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.grid1Ordem,
@@ -234,12 +234,36 @@
             this.GridProcessosEmEspera.Size = new System.Drawing.Size(608, 578);
             this.GridProcessosEmEspera.TabIndex = 2;
             // 
+            // grid2Ordem
+            // 
+            this.grid2Ordem.HeaderText = "Ordem";
+            this.grid2Ordem.Name = "grid2Ordem";
+            this.grid2Ordem.ReadOnly = true;
+            // 
+            // grid2Nome
+            // 
+            this.grid2Nome.HeaderText = "Nome";
+            this.grid2Nome.Name = "grid2Nome";
+            this.grid2Nome.ReadOnly = true;
+            // 
+            // grid2Status
+            // 
+            this.grid2Status.HeaderText = "Status";
+            this.grid2Status.Name = "grid2Status";
+            this.grid2Status.ReadOnly = true;
+            // 
+            // grid2Tempo
+            // 
+            this.grid2Tempo.HeaderText = "Tempo";
+            this.grid2Tempo.Name = "grid2Tempo";
+            this.grid2Tempo.ReadOnly = true;
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.BtnLimparProcessador);
             this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.TxtNucleosProcessador);
+            this.groupBox2.Controls.Add(this.TxtTempoProcessador);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(400, 27);
@@ -251,15 +275,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Configurações Processadores";
             // 
-            // button4
+            // BtnLimparProcessador
             // 
-            this.button4.Location = new System.Drawing.Point(161, 121);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(145, 28);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Parar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BtnLimparProcessador.Location = new System.Drawing.Point(161, 121);
+            this.BtnLimparProcessador.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnLimparProcessador.Name = "BtnLimparProcessador";
+            this.BtnLimparProcessador.Size = new System.Drawing.Size(145, 28);
+            this.BtnLimparProcessador.TabIndex = 5;
+            this.BtnLimparProcessador.Text = "Limpar";
+            this.BtnLimparProcessador.UseVisualStyleBackColor = true;
+            this.BtnLimparProcessador.Click += new System.EventHandler(this.BtnLimparProcessador_Click);
             // 
             // button3
             // 
@@ -272,21 +297,21 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.AdicionarConfiguracao);
             // 
-            // textBox4
+            // TxtNucleosProcessador
             // 
-            this.textBox4.Location = new System.Drawing.Point(145, 64);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(160, 22);
-            this.textBox4.TabIndex = 3;
+            this.TxtNucleosProcessador.Location = new System.Drawing.Point(145, 64);
+            this.TxtNucleosProcessador.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtNucleosProcessador.Name = "TxtNucleosProcessador";
+            this.TxtNucleosProcessador.Size = new System.Drawing.Size(160, 22);
+            this.TxtNucleosProcessador.TabIndex = 3;
             // 
-            // textBox3
+            // TxtTempoProcessador
             // 
-            this.textBox3.Location = new System.Drawing.Point(145, 28);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 22);
-            this.textBox3.TabIndex = 2;
+            this.TxtTempoProcessador.Location = new System.Drawing.Point(145, 28);
+            this.TxtTempoProcessador.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtTempoProcessador.Name = "TxtTempoProcessador";
+            this.TxtTempoProcessador.Size = new System.Drawing.Size(160, 22);
+            this.TxtTempoProcessador.TabIndex = 2;
             // 
             // label5
             // 
@@ -321,6 +346,14 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Operações com Processos";
+            // 
+            // ComboTipoProcessador
+            // 
+            this.ComboTipoProcessador.FormattingEnabled = true;
+            this.ComboTipoProcessador.Location = new System.Drawing.Point(45, 37);
+            this.ComboTipoProcessador.Name = "ComboTipoProcessador";
+            this.ComboTipoProcessador.Size = new System.Drawing.Size(144, 24);
+            this.ComboTipoProcessador.TabIndex = 2;
             // 
             // button6
             // 
@@ -370,7 +403,7 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.dataGridView1);
+            this.groupBox6.Controls.Add(this.GridProcessadores);
             this.groupBox6.Location = new System.Drawing.Point(722, 27);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(359, 156);
@@ -378,17 +411,17 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Processadores";
             // 
-            // dataGridView1
+            // GridProcessadores
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GridProcessadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridProcessadores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tempo,
             this.Nucleos});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 21);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(347, 128);
-            this.dataGridView1.TabIndex = 0;
+            this.GridProcessadores.Location = new System.Drawing.Point(6, 21);
+            this.GridProcessadores.Name = "GridProcessadores";
+            this.GridProcessadores.RowTemplate.Height = 24;
+            this.GridProcessadores.Size = new System.Drawing.Size(347, 128);
+            this.GridProcessadores.TabIndex = 0;
             // 
             // Tempo
             // 
@@ -401,38 +434,6 @@
             this.Nucleos.HeaderText = "Nucleos";
             this.Nucleos.Name = "Nucleos";
             this.Nucleos.ReadOnly = true;
-            // 
-            // grid2Ordem
-            // 
-            this.grid2Ordem.HeaderText = "Ordem";
-            this.grid2Ordem.Name = "grid2Ordem";
-            this.grid2Ordem.ReadOnly = true;
-            // 
-            // grid2Nome
-            // 
-            this.grid2Nome.HeaderText = "Nome";
-            this.grid2Nome.Name = "grid2Nome";
-            this.grid2Nome.ReadOnly = true;
-            // 
-            // grid2Status
-            // 
-            this.grid2Status.HeaderText = "Status";
-            this.grid2Status.Name = "grid2Status";
-            this.grid2Status.ReadOnly = true;
-            // 
-            // grid2Tempo
-            // 
-            this.grid2Tempo.HeaderText = "Tempo";
-            this.grid2Tempo.Name = "grid2Tempo";
-            this.grid2Tempo.ReadOnly = true;
-            // 
-            // ComboTipoProcessador
-            // 
-            this.ComboTipoProcessador.FormattingEnabled = true;
-            this.ComboTipoProcessador.Location = new System.Drawing.Point(45, 37);
-            this.ComboTipoProcessador.Name = "ComboTipoProcessador";
-            this.ComboTipoProcessador.Size = new System.Drawing.Size(144, 24);
-            this.ComboTipoProcessador.TabIndex = 2;
             // 
             // FormularioEscalonador
             // 
@@ -461,7 +462,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridProcessadores)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -485,10 +486,10 @@
         private System.Windows.Forms.Button btnCriaProcesso;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button BtnLimparProcessador;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TxtNucleosProcessador;
+        private System.Windows.Forms.TextBox TxtTempoProcessador;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid1Ordem;
@@ -497,7 +498,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn grid1Tempo;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid1Processador;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView GridProcessadores;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tempo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nucleos;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid2Ordem;
