@@ -8,13 +8,14 @@ namespace EscalonadorDeProcessos.Views
 {
     public partial class FormularioEscalonador : Form
     {
-        protected FormularioEscalonadorController Controller { get; set; }
         public FormularioEscalonador()
         {
             InitializeComponent();
             PreencherValoresATela();
             Controller = new FormularioEscalonadorController();
         }
+
+        protected FormularioEscalonadorController Controller { get; set; }
 
         private void PreencherValoresATela()
         {
@@ -26,17 +27,18 @@ namespace EscalonadorDeProcessos.Views
 
         private void CriarProcessoAleatorio(object sender, EventArgs e)
         {
-
+            var valorAleatorio = new Random().Next();
+            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof (EstadoProcesso)).Length);
+            Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}", Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
+            AtualizarProcessosNaTela();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void PausarProcessos(object sender, EventArgs e)
         {
-
         }
 
         private void CriarProcesso(object sender, EventArgs e)
@@ -47,12 +49,18 @@ namespace EscalonadorDeProcessos.Views
 
         private void AtualizarProcessosNaTela()
         {
-            GridNaoProcessados.DataSource = null;
-            GridNaoProcessados.DataSource = Controller.ListarProcessos().ToList();
+            GridNaoProcessados.Rows.Clear();
+            Controller.ListarProcessos()
+                .ToList()
+                .ForEach(
+                    p => GridNaoProcessados.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo, p.Processador)
+                );
+            GridNaoProcessados.Update();
             GridNaoProcessados.Refresh();
         }
 
-        public void ValidaDados() {
+        public void ValidaDados()
+        {
             if (TxtDescricaoProcesso.Text.Length > 1)
             {
                 if (!ComboStatus.SelectedItem.Equals(""))
@@ -70,33 +78,29 @@ namespace EscalonadorDeProcessos.Views
                     MessageBox.Show("### erro, prioridade inválida ###");
                 }
             }
-            else {
+            else
+            {
                 MessageBox.Show("### erro, descrição inválida");
             }
         }
 
-        public void LimpaTela() {
+        public void LimpaTela()
+        {
             TxtDescricaoProcesso.Text = "";
             ComboStatus.SelectedIndex = 0;
             TxtTempoProcesso.Text = "";
         }
 
-        public void CriaProcesso() {
-
+        public void CriaProcesso()
+        {
         }
 
         private void FinalizarProcessos(object sender, EventArgs e)
         {
-
         }
 
         private void AdicionarConfiguracao(object sender, EventArgs e)
         {
-
         }
     }
-
-    
 }
-
-

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,6 +39,11 @@
             this.btnRandom = new System.Windows.Forms.Button();
             this.btnCriaProcesso = new System.Windows.Forms.Button();
             this.GridNaoProcessados = new System.Windows.Forms.DataGridView();
+            this.grid1Ordem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid1Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid1Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid1Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid1Processador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.grid2Ordem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid2Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,11 +61,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.grid1Ordem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid1Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid1Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid1Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid1Processador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridNaoProcessados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -168,6 +169,12 @@
             // 
             // GridNaoProcessados
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.GridNaoProcessados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridNaoProcessados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridNaoProcessados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.grid1Ordem,
@@ -180,6 +187,31 @@
             this.GridNaoProcessados.Name = "GridNaoProcessados";
             this.GridNaoProcessados.Size = new System.Drawing.Size(571, 561);
             this.GridNaoProcessados.TabIndex = 1;
+            // 
+            // grid1Ordem
+            // 
+            this.grid1Ordem.HeaderText = "Ordem";
+            this.grid1Ordem.Name = "grid1Ordem";
+            // 
+            // grid1Nome
+            // 
+            this.grid1Nome.HeaderText = "Descricao";
+            this.grid1Nome.Name = "grid1Nome";
+            // 
+            // grid1Status
+            // 
+            this.grid1Status.HeaderText = "Status";
+            this.grid1Status.Name = "grid1Status";
+            // 
+            // grid1Tempo
+            // 
+            this.grid1Tempo.HeaderText = "Tempo";
+            this.grid1Tempo.Name = "grid1Tempo";
+            // 
+            // grid1Processador
+            // 
+            this.grid1Processador.HeaderText = "Processador";
+            this.grid1Processador.Name = "grid1Processador";
             // 
             // dataGridView2
             // 
@@ -347,31 +379,6 @@
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Processos em Espera";
-            // 
-            // grid1Ordem
-            // 
-            this.grid1Ordem.HeaderText = "Ordem";
-            this.grid1Ordem.Name = "grid1Ordem";
-            // 
-            // grid1Nome
-            // 
-            this.grid1Nome.HeaderText = "Descricao";
-            this.grid1Nome.Name = "grid1Nome";
-            // 
-            // grid1Status
-            // 
-            this.grid1Status.HeaderText = "Status";
-            this.grid1Status.Name = "grid1Status";
-            // 
-            // grid1Tempo
-            // 
-            this.grid1Tempo.HeaderText = "Tempo";
-            this.grid1Tempo.Name = "grid1Tempo";
-            // 
-            // grid1Processador
-            // 
-            this.grid1Processador.HeaderText = "Processador";
-            this.grid1Processador.Name = "grid1Processador";
             // 
             // FormularioEscalonador
             // 
