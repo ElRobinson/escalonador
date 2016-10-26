@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\FormularioEscalonadorController.cs" />
+    <Compile Include="Models\Processador.cs" />
+    <Compile Include="Models\TipoProcessador.cs" />
     <Compile Include="Views\FormularioEscalonador.cs">
       <SubType>Form</SubType>
     </Compile>

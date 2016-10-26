@@ -23,21 +23,14 @@ namespace EscalonadorDeProcessos.Views
             {
                 ComboStatus.Items.Add(estado);
             }
-        }
 
-        private void CriarProcessoAleatorio(object sender, EventArgs e)
-        {
-            var valorAleatorio = new Random().Next();
-            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof (EstadoProcesso)).Length);
-            Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}", Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
-            AtualizarProcessosNaTela();
+            foreach (var tipo in Enum.GetValues(typeof(TipoProcessador)))
+            {
+                ComboTipoProcessador.Items.Add(tipo);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void PausarProcessos(object sender, EventArgs e)
         {
         }
 
@@ -45,31 +38,18 @@ namespace EscalonadorDeProcessos.Views
         {
             Controller.CriarProcesso(TxtDescricaoProcesso.Text, TxtTempoProcesso.Text, ComboStatus.Text);
             AtualizarProcessosNaTela();
+            LimpaTela();
         }
 
-        private void AtualizarProcessosNaTela()
+        private void CriarProcessoAleatorio(object sender, EventArgs e)
         {
-            GridNaoProcessados.Rows.Clear();
-            Controller.ListarProcessos()
-                .ToList()
-                .ForEach(
-                    p =>
-                    {
-                        GridNaoProcessados.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo,
-                            p.Processador);
-                    });
-            GridNaoProcessados.Update();
-            GridNaoProcessados.Refresh();
+            var valorAleatorio = new Random().Next();
+            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof(EstadoProcesso)).Length);
+            Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}", Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
+            AtualizarProcessosNaTela();
         }
 
-        public void LimpaTela()
-        {
-            TxtDescricaoProcesso.Text = "";
-            ComboStatus.SelectedIndex = 0;
-            TxtTempoProcesso.Text = "";
-        }
-
-        public void CriaProcesso()
+        private void PausarProcessos(object sender, EventArgs e)
         {
         }
 
@@ -79,6 +59,24 @@ namespace EscalonadorDeProcessos.Views
 
         private void AdicionarConfiguracao(object sender, EventArgs e)
         {
+        }
+
+        private void AtualizarProcessosNaTela()
+        {
+            GridProcessosEmEspera.Rows.Clear();
+            Controller.ListarProcessos()
+                .ToList()
+                .ForEach(
+                    p => GridProcessosEmEspera.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo));
+            GridProcessosEmEspera.Update();
+            GridProcessosEmEspera.Refresh();
+        }
+
+        public void LimpaTela()
+        {
+            TxtDescricaoProcesso.Text = "";
+            ComboStatus.SelectedIndex = 0;
+            TxtTempoProcesso.Text = "";
         }
     }
 }
