@@ -98,5 +98,10 @@ namespace EscalonadorDeProcessos.Views
             Controller.LimparProcessadores();
             AtualizarProcessadoresNaTela();
         }
+
+        private void ExecutarProcessos(object sender, EventArgs e)
+        {
+            Controller.ExecutarProcessos(ComboTipoProcessador.Text);
+        }
     }
 }

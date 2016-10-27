@@ -89,5 +89,10 @@ namespace EscalonadorDeProcessos.Controllers
         {
             return Escalonador.Processadores;
         }
+
+        public void ExecutarProcessos(string tipoProcessador)
+        {
+            Escalonador.ExecutarProcessos((TipoProcessador) Enum.Parse(typeof (TipoProcessador), tipoProcessador));
+        }
     }
 }

@@ -1,18 +1,19 @@
-﻿using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EscalonadorDeProcessos.Models
 {
     public class Escalonador
     {
-        public IList<Processo> Processos { get; }
-        public IList<Processador> Processadores { get; }
-
         public Escalonador()
         {
             Processos = new List<Processo>();
             Processadores = new List<Processador>();
         }
+
+        public IList<Processo> Processos { get; }
+        public IList<Processador> Processadores { get; }
 
         public void CriarProcesso(string descricao, int tempo, EstadoProcesso estado)
         {
@@ -28,6 +29,37 @@ namespace EscalonadorDeProcessos.Models
         public void LimparProcessadores()
         {
             Processadores.Clear();
+        }
+
+        public void ExecutarProcessos(TipoProcessador tipo)
+        {
+            switch (tipo)
+            {
+                case TipoProcessador.Simples:
+                {
+                    ExecutarProcessosPorMetodoSimples();
+                    break;
+                }
+                case TipoProcessador.RoundRobin:
+                {
+                    ExecutarProcessosPorMetodoRoundRobin();
+                    break;
+                }
+                default:
+                {
+                    throw new ArgumentOutOfRangeException(nameof(tipo), tipo, null);
+                }
+            }
+        }
+
+        private void ExecutarProcessosPorMetodoRoundRobin()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecutarProcessosPorMetodoSimples()
+        {
+            throw new NotImplementedException();
         }
     }
 }
