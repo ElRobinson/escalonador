@@ -3,6 +3,8 @@ using System.Linq;
 using System.Windows.Forms;
 using EscalonadorDeProcessos.Controllers;
 using EscalonadorDeProcessos.Models;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace EscalonadorDeProcessos.Views
 {
@@ -19,12 +21,12 @@ namespace EscalonadorDeProcessos.Views
 
         private void PreencherValoresATela()
         {
-            foreach (var estado in Enum.GetValues(typeof (EstadoProcesso)))
+            foreach (var estado in Enum.GetValues(typeof(EstadoProcesso)))
             {
                 ComboStatus.Items.Add(estado);
             }
 
-            foreach (var tipo in Enum.GetValues(typeof (TipoProcessador)))
+            foreach (var tipo in Enum.GetValues(typeof(TipoProcessador)))
             {
                 ComboTipoProcessador.Items.Add(tipo);
             }
@@ -44,9 +46,9 @@ namespace EscalonadorDeProcessos.Views
         private void CriarProcessoAleatorio(object sender, EventArgs e)
         {
             var valorAleatorio = new Random().Next();
-            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof (EstadoProcesso)).Length);
+            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof(EstadoProcesso)).Length);
             Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}",
-                Enum.GetName(typeof (EstadoProcesso), valorStatusAleatorio));
+                Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
             AtualizarProcessosNaTela();
         }
 
@@ -102,6 +104,16 @@ namespace EscalonadorDeProcessos.Views
         private void ExecutarProcessos(object sender, EventArgs e)
         {
             Controller.ExecutarProcessos(ComboTipoProcessador.Text);
+            AtualizarLista();
+        }
+
+        private async Task AtualizarLista()
+        {
+            while (!Controller.TodosProcessosForamEncerrados())
+            {
+                AtualizarProcessosNaTela();
+                Thread.Sleep(500);
+            }
         }
     }
 }

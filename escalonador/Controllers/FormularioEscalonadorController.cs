@@ -1,7 +1,7 @@
-﻿using System;
+﻿using EscalonadorDeProcessos.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EscalonadorDeProcessos.Models;
 
 namespace EscalonadorDeProcessos.Controllers
 {
@@ -27,7 +27,7 @@ namespace EscalonadorDeProcessos.Controllers
             if (ProcessoEhValido(descricao, tempoDeVida, status))
             {
                 Escalonador.CriarProcesso(descricao, int.Parse(tempoDeVida),
-                    (EstadoProcesso) Enum.Parse(typeof (EstadoProcesso), status));
+                    (EstadoProcesso)Enum.Parse(typeof(EstadoProcesso), status));
             }
         }
 
@@ -92,7 +92,12 @@ namespace EscalonadorDeProcessos.Controllers
 
         public void ExecutarProcessos(string tipoProcessador)
         {
-            Escalonador.ExecutarProcessos((TipoProcessador) Enum.Parse(typeof (TipoProcessador), tipoProcessador));
+            Escalonador.ExecutarProcessos((TipoProcessador)Enum.Parse(typeof(TipoProcessador), tipoProcessador));
+        }
+
+        public bool TodosProcessosForamEncerrados()
+        {
+            return Escalonador.TodosProcessosForamEncerrados();
         }
     }
 }
