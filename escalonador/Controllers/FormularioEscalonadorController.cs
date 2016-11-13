@@ -1,6 +1,7 @@
 ﻿using EscalonadorDeProcessos.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace EscalonadorDeProcessos.Controllers
@@ -93,6 +94,15 @@ namespace EscalonadorDeProcessos.Controllers
         public void ExecutarProcessos(string tipoProcessador)
         {
             Escalonador.ExecutarProcessos((TipoProcessador)Enum.Parse(typeof(TipoProcessador), tipoProcessador));
+        }
+
+        internal IList<Processo> ListarProcessosProntos()
+        {
+            return Escalonador.Processos
+                .Where(p =>
+                    p.Estado.Equals(EstadoProcesso.Pronto) || p.Estado.Equals(EstadoProcesso.Encerrado)
+                )
+                .ToList();
         }
 
         public bool TodosProcessosForamEncerrados()

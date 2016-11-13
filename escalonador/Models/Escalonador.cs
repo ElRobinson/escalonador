@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EscalonadorDeProcessos.Models
@@ -32,18 +33,20 @@ namespace EscalonadorDeProcessos.Models
             Processadores.Clear();
         }
 
-        public async void ExecutarProcessos(TipoProcessador tipo)
+        public void ExecutarProcessos(TipoProcessador tipo)
         {
+            Task processo;
+
             switch (tipo)
             {
                 case TipoProcessador.Simples:
                     {
-                        ExecutarProcessosPorMetodoSimples();
+                        processo = new Task(ExecutarProcessosPorMetodoSimples);
                         break;
                     }
                 case TipoProcessador.RoundRobin:
                     {
-                        ExecutarProcessosPorMetodoRoundRobin();
+                        processo = new Task(ExecutarProcessosPorMetodoRoundRobin);
                         break;
                     }
                 default:
@@ -51,47 +54,70 @@ namespace EscalonadorDeProcessos.Models
                         throw new ArgumentOutOfRangeException(nameof(tipo), tipo, null);
                     }
             }
+
+            processo.Start();
         }
 
-        private async Task ExecutarProcessosPorMetodoRoundRobin()
+        private async void ExecutarProcessosPorMetodoRoundRobin()
         {
-            throw new NotImplementedException();
-        }
-
-        private async Task ExecutarProcessosPorMetodoSimples()
-        {
-            var tempoSobraDeExecucao = 0;
+            var listaDeThreads = new List<Thread>();
             while (!TodosProcessosForamProntos())
             {
-                var processoAtual = Processos.FirstOrDefault(p => p.Estado.Equals(EstadoProcesso.Novo));
+                var processoAtual = Processos.FirstOrDefault(p =>
+                    p.Estado.Equals(EstadoProcesso.Novo) || p.Estado.Equals(EstadoProcesso.Espera)
+                );
 
-                processoAtual.Estado = EstadoProcesso.EmExecucao;
-
-                while (processoAtual.Tempo > processoAtual.TempoExecutado)
+                if (processoAtual != null)
                 {
-                    var tempoGanhoDeExecucao = ExecucaoDeProcessadoresSimples() + tempoSobraDeExecucao;
-                    if (processoAtual.Tempo <= processoAtual.TempoExecutado + tempoGanhoDeExecucao)
+                    foreach (var processador in Processadores)
                     {
-                        processoAtual.TempoExecutado += tempoGanhoDeExecucao;
-                        if (processoAtual.Tempo == processoAtual.TempoExecutado)
-                        {
-                            processoAtual.Estado = EstadoProcesso.Pronto;
-                        }
+                        Task.Run(() => ExecutarProcessoEmProcessador(processoAtual, processador));
                     }
-                    else
-                    {
-                        tempoSobraDeExecucao = (processoAtual.TempoExecutado + tempoGanhoDeExecucao) - processoAtual.Tempo;
-                        processoAtual.TempoExecutado = processoAtual.Tempo;
-                    }
+
+                    Thread.Sleep(Processadores.Sum(p => p.TempoQuantum * p.MaxDeProcessos));
                 }
             }
 
             Processos.ToList().ForEach(p => p.Estado = EstadoProcesso.Encerrado);
         }
 
-        private int ExecucaoDeProcessadoresSimples()
+        private async void ExecutarProcessosPorMetodoSimples()
         {
-            return Processadores.Aggregate(0, (lastValue, p) => lastValue + (p.MaxDeProcessos * p.TempoQuantum) + 1);
+            var listaDeThreads = new List<Thread>();
+            while (!TodosProcessosForamProntos())
+            {
+                var processoAtual = Processos.FirstOrDefault(p =>
+                    p.Estado.Equals(EstadoProcesso.Novo) || p.Estado.Equals(EstadoProcesso.Espera)
+                );
+
+                while (processoAtual != null && !processoAtual.Estado.Equals(EstadoProcesso.Pronto))
+                {
+                    foreach (var processador in Processadores)
+                    {
+                        Task.Run(() => ExecutarProcessoEmProcessador(processoAtual, processador));
+                    }
+
+                    Thread.Sleep(Processadores.Sum(p => p.TempoQuantum * p.MaxDeProcessos));
+                }
+            }
+
+            Processos.ToList().ForEach(p => p.Estado = EstadoProcesso.Encerrado);
+        }
+
+        private async void ExecutarProcessoEmProcessador(Processo processo, Processador processador)
+        {
+            var novoTempo = (processo.TempoExecutado + processador.TempoQuantum);
+            processo.Estado = EstadoProcesso.EmExecucao;
+            processo.TempoExecutado = novoTempo < processo.Tempo ? novoTempo : processo.Tempo;
+
+            if (processo.Tempo > processo.TempoExecutado)
+            {
+                processo.Estado = EstadoProcesso.Espera;
+            }
+            else
+            {
+                processo.Estado = EstadoProcesso.Pronto;
+            }
         }
 
         private bool TodosProcessosForamProntos()

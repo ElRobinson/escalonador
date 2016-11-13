@@ -46,9 +46,11 @@ namespace EscalonadorDeProcessos.Views
         private void CriarProcessoAleatorio(object sender, EventArgs e)
         {
             var valorAleatorio = new Random().Next();
-            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof(EstadoProcesso)).Length);
+            // var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof(EstadoProcesso)).Length);
+            // Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}",
+            //    Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
             Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}",
-                Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
+                EstadoProcesso.Novo.ToString());
             AtualizarProcessosNaTela();
         }
 
@@ -77,6 +79,17 @@ namespace EscalonadorDeProcessos.Views
             GridProcessosEmEspera.Refresh();
         }
 
+        private void AtualizarProcessosProntosNaTela()
+        {
+            GridProcessosProntos.Rows.Clear();
+            Controller.ListarProcessosProntos()
+                .ToList()
+                .ForEach(
+                    p => GridProcessosProntos.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo));
+            GridProcessosProntos.Update();
+            GridProcessosProntos.Refresh();
+        }
+
         private void AtualizarProcessadoresNaTela()
         {
             GridProcessadores.Rows.Clear();
@@ -101,19 +114,23 @@ namespace EscalonadorDeProcessos.Views
             AtualizarProcessadoresNaTela();
         }
 
-        private void ExecutarProcessos(object sender, EventArgs e)
+        private async void ExecutarProcessos(object sender, EventArgs e)
         {
             Controller.ExecutarProcessos(ComboTipoProcessador.Text);
             AtualizarLista();
         }
 
-        private async Task AtualizarLista()
+        private async void AtualizarLista()
         {
             while (!Controller.TodosProcessosForamEncerrados())
             {
                 AtualizarProcessosNaTela();
+                AtualizarProcessosProntosNaTela();
                 Thread.Sleep(500);
             }
+
+            AtualizarProcessosNaTela();
+            AtualizarProcessosProntosNaTela();
         }
     }
 }

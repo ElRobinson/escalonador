@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,7 +38,7 @@
             this.ComboStatus = new System.Windows.Forms.ComboBox();
             this.btnRandom = new System.Windows.Forms.Button();
             this.btnCriaProcesso = new System.Windows.Forms.Button();
-            this.GridProcessos = new System.Windows.Forms.DataGridView();
+            this.GridProcessosProntos = new System.Windows.Forms.DataGridView();
             this.grid1Ordem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid1Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid1Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +67,7 @@
             this.Tempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nucleos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridProcessos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridProcessosProntos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridProcessosEmEspera)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -174,26 +174,26 @@
             this.btnCriaProcesso.UseVisualStyleBackColor = true;
             this.btnCriaProcesso.Click += new System.EventHandler(this.CriarProcesso);
             // 
-            // GridProcessos
+            // GridProcessosProntos
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            this.GridProcessos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.GridProcessos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridProcessos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.GridProcessosProntos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.GridProcessosProntos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridProcessosProntos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.grid1Ordem,
             this.grid1Nome,
             this.grid1Status,
             this.grid1Tempo,
             this.grid1Processador});
-            this.GridProcessos.Location = new System.Drawing.Point(8, 23);
-            this.GridProcessos.Margin = new System.Windows.Forms.Padding(4);
-            this.GridProcessos.Name = "GridProcessos";
-            this.GridProcessos.Size = new System.Drawing.Size(644, 578);
-            this.GridProcessos.TabIndex = 1;
+            this.GridProcessosProntos.Location = new System.Drawing.Point(8, 23);
+            this.GridProcessosProntos.Margin = new System.Windows.Forms.Padding(4);
+            this.GridProcessosProntos.Name = "GridProcessosProntos";
+            this.GridProcessosProntos.Size = new System.Drawing.Size(644, 578);
+            this.GridProcessosProntos.TabIndex = 1;
             // 
             // grid1Ordem
             // 
@@ -379,7 +379,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.GridProcessos);
+            this.groupBox4.Controls.Add(this.GridProcessosProntos);
             this.groupBox4.Location = new System.Drawing.Point(648, 191);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
@@ -454,7 +454,7 @@
             this.Text = "EscalonadorDeProcessos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridProcessos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridProcessosProntos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridProcessosEmEspera)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -470,7 +470,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView GridProcessos;
+        private System.Windows.Forms.DataGridView GridProcessosProntos;
         private System.Windows.Forms.DataGridView GridProcessosEmEspera;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
