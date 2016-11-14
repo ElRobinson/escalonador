@@ -3,8 +3,6 @@ using System.Linq;
 using System.Windows.Forms;
 using EscalonadorDeProcessos.Controllers;
 using EscalonadorDeProcessos.Models;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace EscalonadorDeProcessos.Views
 {
@@ -16,24 +14,17 @@ namespace EscalonadorDeProcessos.Views
             PreencherValoresATela();
             Controller = controller;
         }
-
+            
         protected FormularioEscalonadorController Controller { get; set; }
+
+        private BindingSource customersBindingSource = new BindingSource();
 
         private void PreencherValoresATela()
         {
             foreach (var estado in Enum.GetValues(typeof(EstadoProcesso)))
-            {
                 ComboStatus.Items.Add(estado);
-            }
 
-            foreach (var tipo in Enum.GetValues(typeof(TipoProcessador)))
-            {
-                ComboTipoProcessador.Items.Add(tipo);
-            }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+           
         }
 
         private void CriarProcesso(object sender, EventArgs e)
@@ -41,27 +32,18 @@ namespace EscalonadorDeProcessos.Views
             Controller.CriarProcesso(TxtDescricaoProcesso.Text, TxtTempoProcesso.Text, ComboStatus.Text);
             AtualizarProcessosNaTela();
             LimpaTela();
+
         }
 
         private void CriarProcessoAleatorio(object sender, EventArgs e)
         {
             var valorAleatorio = new Random().Next();
-            // var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof(EstadoProcesso)).Length);
-            // Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}",
-            //    Enum.GetName(typeof(EstadoProcesso), valorStatusAleatorio));
+            var valorStatusAleatorio = new Random().Next(Enum.GetValues(typeof (EstadoProcesso)).Length);
             Controller.CriarProcesso($"Random - {valorAleatorio}", $"{valorAleatorio}",
-                EstadoProcesso.Novo.ToString());
+                Enum.GetName(typeof (EstadoProcesso), valorStatusAleatorio));
             AtualizarProcessosNaTela();
         }
-
-        private void PausarProcessos(object sender, EventArgs e)
-        {
-        }
-
-        private void FinalizarProcessos(object sender, EventArgs e)
-        {
-        }
-
+        
         private void AdicionarConfiguracao(object sender, EventArgs e)
         {
             Controller.CriarProcessador(TxtTempoProcessador.Text, TxtNucleosProcessador.Text);
@@ -70,24 +52,11 @@ namespace EscalonadorDeProcessos.Views
 
         private void AtualizarProcessosNaTela()
         {
-            GridProcessosEmEspera.Rows.Clear();
-            Controller.ListarProcessos()
-                .ToList()
-                .ForEach(
-                    p => GridProcessosEmEspera.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo));
-            GridProcessosEmEspera.Update();
-            GridProcessosEmEspera.Refresh();
-        }
+            customersBindingSource.DataSource = (Controller.ListarProcessos().Where(c => c.Estado != EstadoProcesso.Espera).ToList());   
+            GridProcessos.DataSource = customersBindingSource.DataSource;
 
-        private void AtualizarProcessosProntosNaTela()
-        {
-            GridProcessosProntos.Rows.Clear();
-            Controller.ListarProcessosProntos()
-                .ToList()
-                .ForEach(
-                    p => GridProcessosProntos.Rows.Add(p.Ordem, p.Descricao, p.Estado, p.Tempo));
-            GridProcessosProntos.Update();
-            GridProcessosProntos.Refresh();
+            customersBindingSource.DataSource = (Controller.ListarProcessos().Where(c => c.Estado == EstadoProcesso.Espera).ToList());
+            GridProcessosEmEspera.DataSource = customersBindingSource.DataSource;
         }
 
         private void AtualizarProcessadoresNaTela()
@@ -114,23 +83,15 @@ namespace EscalonadorDeProcessos.Views
             AtualizarProcessadoresNaTela();
         }
 
-        private async void ExecutarProcessos(object sender, EventArgs e)
+        private void ExecutarProcessos(object sender, EventArgs e)
         {
-            Controller.ExecutarProcessos(ComboTipoProcessador.Text);
-            AtualizarLista();
+            //Controller.ExecutarProcessos(ComboTipoProcessador.Text);
+
         }
 
-        private async void AtualizarLista()
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            while (!Controller.TodosProcessosForamEncerrados())
-            {
-                AtualizarProcessosNaTela();
-                AtualizarProcessosProntosNaTela();
-                Thread.Sleep(500);
-            }
-
             AtualizarProcessosNaTela();
-            AtualizarProcessosProntosNaTela();
         }
     }
 }

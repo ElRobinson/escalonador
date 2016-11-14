@@ -2,10 +2,10 @@
 {
     public enum EstadoProcesso
     {
-        Novo,
-        EmExecucao,
-        Espera,
-        Pronto,
-        Encerrado
+        
+        EmExecucao = 1,
+        Espera = 2,
+        Pronto = 3,
+        Encerrado = 4
     }
 }
